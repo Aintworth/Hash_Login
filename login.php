@@ -4,11 +4,14 @@ if (isset($_POST['submit']))
 {
     $id = $_POST['ID'];
     $pass = $_POST['password'];
-    $query_check = mysqli_query($con, "select * from tbluser where username ='".$id."'");
+    $query_check = mysqli_query($con, "select id, salt from tbluser where username ='".$id."'");
     if(mysqli_num_rows($query_check)>0)
     {
         $data = mysqli_fetch_array($query_check, MYSQLI_ASSOC);
         $hash = md5($data['salt'].$pass.$data['salt']);
+        echo " <form name='hash' id='hash_send'  method='POST' action'landing.php'>
+        <input type='hidden' name='hash' value='".$hash."'"/>
+        </form>"
         if($hash===$data['password'])
         {
             header("location: landing.php");
