@@ -9,9 +9,8 @@ if (isset($_POST['submit']))
     {
         $data = mysqli_fetch_array($query_check, MYSQLI_ASSOC);
         $hash = md5($data['salt'].$pass.$data['salt']);
-        echo " <form name='hash' id='hash_send'  method='POST' action'landing.php'>
-        <input type='hidden' name='hash' value='".$hash."'"/>
-        </form>"
+        //echo " <form name='hash' id='hash_send'  method='POST' action'landing.php'>
+        //<input type='hidden' name='hash' value='".$hash."'/> </form>";
         if($hash===$data['password'])
         {
             header("location: landing.php");
